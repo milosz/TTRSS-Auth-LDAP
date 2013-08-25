@@ -198,7 +198,8 @@ class Auth_Ldap extends Plugin implements IAuthModule {
 			//Searching for user
 			$completedSearchFiler=str_replace('???',$login,LDAP_AUTH_SEARCHFILTER);
 			$filterObj=Net_LDAP2_Filter::parse($completedSearchFiler);
-			$searchResults=$this->ldapObj->search(LDAP_AUTH_BASEDN, $filterObj);
+			$searchResults=$ldapConn->search(LDAP_AUTH_BASEDN, $filterObj);
+
 			if ($this->ldapObj->isError($searchResults)) {
 				$this->_log('LDAP Search Failed: '.$searchResults->getMessage());
 				return FALSE;
